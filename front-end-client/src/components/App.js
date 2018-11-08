@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import './App.css';
 import axios from 'axios';
-import { join } from 'upath';
+import AddModal from './addModal.js';
 
 class App extends Component {
 
@@ -9,7 +9,10 @@ class App extends Component {
     super(props)
     this.state = {
       response: [],
-      data: []
+      data: [],
+      clickedAdd: false,
+      clickedRemove: false,
+      idTool: 0
     }
 
     this.renderData = this.renderData.bind(this);
@@ -44,6 +47,7 @@ class App extends Component {
     console.log(this.state.data);
 
     return (
+      <Fragment>
       <div className="App">
         <main className="container">
           <section className="div-top-title">
@@ -56,7 +60,7 @@ class App extends Component {
               <input type="radio"/><label>search in tags only</label>
             </div>
             <div className="div-search-add-right">
-              <button>+ add</button>
+              <button onClick={() => this.setState({clickedAdd: !this.state.clickedAdd})}>+ add</button>
             </div>
           </section>
           <section className="section-main">
@@ -78,7 +82,9 @@ class App extends Component {
               }
           </section>
         </main>
-      </div>
+        {this.state.clickedAdd  ? <AddModal /> : ' '}
+        </div>
+      </Fragment>
     )
   }
 }
