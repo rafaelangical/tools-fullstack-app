@@ -1,0 +1,79 @@
+.App {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.container{
+  width: 80%;
+  height: 100%;
+  margin: 0 auto;
+}
+.div-top-title{
+  width: 100%;
+  height: 30%;
+}
+.div-top-title > h1 {
+  font-size: 3em;
+  font-weight: 250;
+  letter-spacing: 0.5ch;
+}
+.div-top-title > h3 {
+  font-size: 1.6em;
+  font-weight: 250;
+}
+.div-search-add {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.div-search-add-left, .div-search-add-right{
+  width: 50%;
+  height: 100%;
+}
+
+.div-search-add-right{
+  display: flex;
+  justify-content: end;
+}
+
+.div-search-add-left > input.search {
+  width: 50%;
+}
+
+.section-main{
+  width:100%;
+  height: 70%;
+  display: flex;
+  flex-flow: row wrap;
+  margin: 0 auto;
+}
+
+.div-tools {
+  width: 100%;
+  height: 30%;
+  padding: 1em;
+  margin-top: 1em;
+}
+
+.div-tools-top{
+  width: 100%;
+  height: 10%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  font-size: 1.7em;
+}
+
+.div-tools-top > a{
+  color:  dodgerblue; 
+}
+
+p.tags{
+  font-size: 1.2em;
+  font-weight: 40000;
+  color: black;
+}
