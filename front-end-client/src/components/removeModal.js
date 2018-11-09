@@ -11,7 +11,6 @@ class RemoveModal extends Component {
   }
 
   handleRemove() {
-    const id = this.props.id;
     axios.delete(`http://localhost:3000/tools/${this.props.id}`)
     this.props.closeModal();
   }
