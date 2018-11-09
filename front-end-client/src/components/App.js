@@ -2,20 +2,27 @@ import React, { Component, Fragment } from 'react';
 import './App.css';
 import axios from 'axios';
 import AddModal from './addModal.js';
+import RemoveModal from './removeModal.js';
 
 class App extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      response: [],
       data: [],
-      clickedAdd: false,
-      clickedRemove: false,
-      idTool: 0
+      search: '',
+      id: 0,
+      withTag: false,
+      isOpen: false,
+      isOpenAdd: false
     }
 
     this.renderData = this.renderData.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+  }
+
+  componentWillUpdate() {
+    this.componentDidMount();
   }
 
   componentDidMount() {
@@ -27,25 +34,50 @@ class App extends Component {
       .catch(err => console.log(err))
   }
 
-  renderData() {
-    const data = this.state.data;
-    data.map((item,index)=> {
-      return <div key={index}>
-        <p>{item}</p>
-        <h3>{item.description}</h3>
-        {item.tags.map((item,index) => {
-          return <ul key={index}>
-            <li>{item}</li>
-          </ul>
-        })}
-      </div>
-    })
+  remove(index) {
+    this.setState({id: index});
+    console.log(index);
+    this.setState({isOpen: !this.state.isOpen})
+  }
+
+  closeModal() {
+    this.setState({isOpen: !this.state.isOpen});
+  }
+
+  handleSearch(e) {
+    if(e.length<1){
+      this.componentDidMount();
+    }
+    this.setState({search: e});
+    const search = this.state.search;
+    if(this.state.withTag){
+      axios.get(`http://localhost:3000/tools?tags_like=${search}`)
+      .then(res => {
+        this.setState({ data: res.data})
+      })
+      .catch(err => console.log(err))
+    }else{
+      axios.get(`http://localhost:3000/tools?q=${search}`)
+      .then(res => {
+        this.setState({ data: res.data})
+      })
+      .catch(err => console.log(err))
+    }
+  }
+
+  handleSearchWithTags(e) {
+    this.setState({search: e});
+    const search = this.state.search;
+    axios.get(`http://localhost:3000/tools?tags_like=${search}`)
+      .then(res => {
+        this.setState({ data: res.data})
+        console.log(res.data)
+      })
+      .catch(err => console.log(err))
   }
 
   render() {
     const data = this.state.data;
-    console.log(this.state.data);
-
     return (
       <Fragment>
       <div className="App">
@@ -56,25 +88,25 @@ class App extends Component {
           </section>
           <section className="div-search-add">
             <div className="div-search-add-left">
-              <input type="text" placeholder="search" className="search"/>
-              <input type="radio"/><label>search in tags only</label>
+              <input type="text" placeholder="search" className="search" onChange={(e) => this.handleSearch(e.target.value)} value={this.state.search}/>
+              <input type="checkbox" onChange={() => this.setState({withTag: true})}/>
+              <label>search in tags only</label>
             </div>
             <div className="div-search-add-right">
-              <button onClick={() => this.setState({clickedAdd: !this.state.clickedAdd})}>+ add</button>
+              <button onClick={() => this.setState({isOpenAdd: !this.state.isOpenAdd})}>+ add</button>
             </div>
           </section>
           <section className="section-main">
-              {data.map((item,index, data)=> {
-                return <div className="div-tools" key={index} style={{border: "1px solid black"}}>
+              {data.map((item, data)=> {
+                return <div className="div-tools"key={item.id} style={{border: "1px solid black"}}>
                   <div className="div-tools-top">
                     <a href="#">{item.title}</a>
-                    <button>X remove</button>
+                    <button onClick={() => this.remove(item.id)}>X remove</button>
                   </div>
                   <p>{item.description}</p>
                   {function() {
                     const tag = item.tags;
                     const newarray = new Array(tag).join('');
-                    console.log(newarray);
                     return <p className="tags">Tags: {newarray}</p>
                   }()}
                 </div>
@@ -82,7 +114,15 @@ class App extends Component {
               }
           </section>
         </main>
-        {this.state.clickedAdd  ? <AddModal /> : ' '}
+        <AddModal 
+          show={this.state.isOpenAdd}
+          closeModal={this.closeModal}
+        />
+        <RemoveModal
+          show={this.state.isOpen}
+          closeModal={this.closeModal}
+          id={this.state.id}
+        /> 
         </div>
       </Fragment>
     )
