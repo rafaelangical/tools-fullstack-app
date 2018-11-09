@@ -20,6 +20,11 @@ class AddModal extends Component {
   }
 
   render() {
+
+    if (!this.props.show) {
+      return null;
+    }
+    
     return (
       <div className="App-modal-add">
         <div className="div-modal-add-full">
