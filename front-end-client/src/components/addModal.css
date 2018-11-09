@@ -18,3 +18,34 @@
   display: flex;
   flex-flow: row wrap;
 }
+.div-modal-add-top{
+  width: 80%;
+  height:  10%;
+  margin: 0 auto;
+  justify-content: center;
+}
+.div-modal-add-middle{
+  width: 80%;
+  height: 70%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  flex-flow: column wrap;
+  align-content: space-between;
+}
+.div-modal-add-middle > input{
+  width: 90%;
+  height: 6%
+}
+.div-modal-add-bottom{
+  width: 80%;
+  height: 10%;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: column wrap;
+  align-content: flex-end;
+}
+textarea{
+  width: 90%;
+  height: 25%;
+}
