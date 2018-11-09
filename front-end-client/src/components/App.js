@@ -16,20 +16,13 @@ class App extends Component {
       isOpen: false,
       isOpenAdd: false
     }
-
-    this.renderData = this.renderData.bind(this);
     this.closeModal = this.closeModal.bind(this);
-  }
-
-  componentWillUpdate() {
-    this.componentDidMount();
   }
 
   componentDidMount() {
     axios.get('http://localhost:3000/tools')
       .then(res => {
         this.setState({ data: res.data})
-        console.log(res.data)
       })
       .catch(err => console.log(err))
   }
