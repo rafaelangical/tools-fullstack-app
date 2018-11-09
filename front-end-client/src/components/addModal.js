@@ -6,17 +6,23 @@ class AddModal extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      response: []
+      title: '',
+      description: '',
+      link: '',
+      tags: []
     }
+    this.createTool = this.createTool.bind(this); 
   }
 
-  componentDidMount() {
-    axios.get('http://localhost:3000/tools')
-      .then(res => {
-        this.setState({ data: res.data})
-        console.log(res.data)
-      })
-      .catch(err => console.log(err))
+  createTool() {
+    axios.post('http://localhost:3000/tools' , {
+      name: this.state.title,
+      link: this.state.link,
+      description: this.state.description,
+      tags: this.state.tags
+    })
+    .then(resp => console.log(resp))
+    .catch(err => console.log(err))
   }
 
   render() {
@@ -24,11 +30,26 @@ class AddModal extends Component {
     if (!this.props.show) {
       return null;
     }
-    
+
     return (
       <div className="App-modal-add">
         <div className="div-modal-add-full">
-          <p>addModal</p>
+          <div className="div-modal-add-top">
+            <h3>+ Add new tool</h3>
+          </div>
+          <div className="div-modal-add-middle">
+            <label>Tool Name</label>
+            <input type="text" value={this.state.title} onChange={(e) => this.setState({title: e.target.value})}/>
+            <label>Tool Link</label>
+            <input type="text" value={this.state.link} onChange={(e) => this.setState({link: e.target.value})}/>
+            <label>Tool Description</label>
+            <textarea type="text" value={this.state.description} onChange={(e) => this.setState({description: e.target.value})}/>
+            <label>Tags</label>
+            <input type="text" value={this.state.tags} onChange={(e) => this.setState({tags: e.target.value})}/>
+          </div>
+          <div className="div-modal-add-bottom">
+            <button onClick={this.createTool}>Add tool</button>
+          </div>
         </div>
       </div>
     )
