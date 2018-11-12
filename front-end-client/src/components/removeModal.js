@@ -31,7 +31,6 @@ class RemoveModal extends Component {
           <div className="div-modal-remove-bottom">
             <button onClick={() => this.props.closeModal()}>Cancel</button>
             <button className="remove-tool-button" onClick={() => this.handleRemove()}>Yes, remove</button>
-            id: {this.props.id}
           </div>
         </div>
       </div>

@@ -17,6 +17,7 @@ class App extends Component {
       isOpenAdd: false
     }
     this.closeModal = this.closeModal.bind(this);
+    this.closeModalAdd = this.closeModalAdd.bind(this);
   }
 
   componentDidMount() {
@@ -29,13 +30,19 @@ class App extends Component {
 
   remove(index) {
     this.setState({id: index});
-    console.log(index);
     this.setState({isOpen: !this.state.isOpen})
   }
 
   closeModal() {
     this.setState({isOpen: !this.state.isOpen});
+    this.componentDidMount();
   }
+  
+  closeModalAdd() {
+    this.setState({isOpenAdd: !this.state.isOpenAdd});
+    this.componentDidMount();
+  }
+
 
   handleSearch(e) {
     if(e.length<1){
@@ -70,7 +77,9 @@ class App extends Component {
   }
 
   render() {
+
     const data = this.state.data;
+
     return (
       <Fragment>
       <div className="App">
@@ -90,18 +99,17 @@ class App extends Component {
             </div>
           </section>
           <section className="section-main">
-              {data.map((item, data)=> {
+              {data.map( item => {
+                const tags = new Array(item.tags).map(t => `#${t}`).join(' ');
+                console.log(tags)
+
                 return <div className="div-tools"key={item.id} style={{border: "1px solid black"}}>
                   <div className="div-tools-top">
-                    <a href="#">{item.title}</a>
+                    <a href={item.id}>{item.title}</a>
                     <button onClick={() => this.remove(item.id)}>X remove</button>
                   </div>
                   <p>{item.description}</p>
-                  {function() {
-                    const tag = item.tags;
-                    const newarray = new Array(tag).join('');
-                    return <p className="tags">Tags: {newarray}</p>
-                  }()}
+                  <p className="tags">{tags}</p>
                 </div>
               })
               }
@@ -109,7 +117,7 @@ class App extends Component {
         </main>
         <AddModal 
           show={this.state.isOpenAdd}
-          closeModal={this.closeModal}
+          closeModalAdd={this.closeModalAdd}
         />
         <RemoveModal
           show={this.state.isOpen}
