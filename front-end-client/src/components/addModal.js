@@ -16,12 +16,15 @@ class AddModal extends Component {
 
   createTool() {
     axios.post('http://localhost:3000/tools' , {
-      name: this.state.title,
+      title: this.state.title,
       link: this.state.link,
       description: this.state.description,
       tags: this.state.tags
     })
-    .then(resp => console.log(resp))
+    .then(resp => {
+      console.log(resp)
+      this.props.closeModalAdd();
+    })
     .catch(err => console.log(err))
   }
 
