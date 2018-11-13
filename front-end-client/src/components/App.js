@@ -77,9 +77,7 @@ class App extends Component {
   }
 
   render() {
-
     const data = this.state.data;
-
     return (
       <Fragment>
       <div className="App">
@@ -99,17 +97,18 @@ class App extends Component {
             </div>
           </section>
           <section className="section-main">
-              {data.map( item => {
-                const tags = new Array(item.tags).map(t => `#${t}`).join(' ');
-                console.log(tags)
-
+              {data.map((item, data)=> {
                 return <div className="div-tools"key={item.id} style={{border: "1px solid black"}}>
                   <div className="div-tools-top">
                     <a href={item.id}>{item.title}</a>
                     <button onClick={() => this.remove(item.id)}>X remove</button>
                   </div>
                   <p>{item.description}</p>
-                  <p className="tags">{tags}</p>
+                  {function() {
+                    const tag = item.tags;
+                    const newarray = new Array(tag).join("");
+                    return <p className="tags">Tags: {newarray}</p>
+                  }()}
                 </div>
               })
               }
