@@ -211,32 +211,11 @@
       "id": 47
     },
     {
-      "title": "teste",
-      "link": "teste.com",
-      "description": "testando a api rest bossabox ",
-      "tags": "teste html js react json",
-      "id": 50
-    },
-    {
-      "title": "fechando",
-      "link": "chea.com",
-      "description": "jsjsj",
-      "tags": "'jsj",
-      "id": 52
-    },
-    {
       "title": "ss",
-      "link": "sss",
-      "description": "sss",
-      "tags": "htmlcssjs",
-      "id": 53
-    },
-    {
-      "title": "rafael",
-      "link": "link.com",
-      "description": "sjsjjsj",
-      "tags": "spkksk sjsjsjs sjsjs",
-      "id": 54
+      "link": "ss",
+      "description": "ss",
+      "tags": "ss",
+      "id": 48
     }
   ]
 }

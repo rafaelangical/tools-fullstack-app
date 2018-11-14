@@ -18,6 +18,7 @@ class App extends Component {
     }
     this.closeModal = this.closeModal.bind(this);
     this.closeModalAdd = this.closeModalAdd.bind(this);
+    this.withTag = this.withTag.bind(this);
   }
 
   componentDidMount() {
@@ -65,15 +66,13 @@ class App extends Component {
     }
   }
 
-  handleSearchWithTags(e) {
-    this.setState({search: e});
-    const search = this.state.search;
-    axios.get(`http://localhost:3000/tools?tags_like=${search}`)
-      .then(res => {
-        this.setState({ data: res.data})
-        console.log(res.data)
-      })
-      .catch(err => console.log(err))
+  withTag(e) {
+    console.log(e.target.value);
+    if(e.target.value ===   'on') {
+      this.setState({withTag: true});
+    }else{
+      this.setState({withTag: false});
+    }
   }
 
   render() {
@@ -89,11 +88,11 @@ class App extends Component {
           <section className="div-search-add">
             <div className="div-search-add-left">
               <input type="text" placeholder="search" className="search" onChange={(e) => this.handleSearch(e.target.value)} value={this.state.search}/>
-              <input type="checkbox" onChange={() => this.setState({withTag: true})}/>
+              <input type="checkbox" onClick={(e) => this.withTag(e)}/>
               <label>search in tags only</label>
             </div>
             <div className="div-search-add-right">
-              <button onClick={() => this.setState({isOpenAdd: !this.state.isOpenAdd})}>+ add</button>
+              <button className="button-add" onClick={() => this.setState({isOpenAdd: !this.state.isOpenAdd})}>+ add</button>
             </div>
           </section>
           <section className="section-main">
@@ -101,7 +100,7 @@ class App extends Component {
                 return <div className="div-tools"key={item.id} style={{border: "1px solid black"}}>
                   <div className="div-tools-top">
                     <a href={item.id}>{item.title}</a>
-                    <button onClick={() => this.remove(item.id)}>X remove</button>
+                    <button  className="button-remove" onClick={() => this.remove(item.id)}>X remove</button>
                   </div>
                   <p>{item.description}</p>
                   {function() {
