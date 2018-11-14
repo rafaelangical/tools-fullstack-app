@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test if AddModal is rendered correctly renders correctly AddModal 1`] = `null`;

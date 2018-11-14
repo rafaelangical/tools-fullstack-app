@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test if App is rendered correctly renders correctly App 1`] = `
+<div
+  className="App"
+>
+  <main
+    className="container"
+  >
+    <section
+      className="div-top-title"
+    >
+      <h1>
+        VUTTR
+      </h1>
+      <h3>
+        Very Useful Tools to Remember
+      </h3>
+    </section>
+    <section
+      className="div-search-add"
+    >
+      <div
+        className="div-search-add-left"
+      >
+        <input
+          className="search"
+          onChange={[Function]}
+          placeholder="search"
+          type="text"
+          value=""
+        />
+        <input
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <label>
+          search in tags only
+        </label>
+      </div>
+      <div
+        className="div-search-add-right"
+      >
+        <button
+          onClick={[Function]}
+        >
+          + add
+        </button>
+      </div>
+    </section>
+    <section
+      className="section-main"
+    />
+  </main>
+</div>
+`;
