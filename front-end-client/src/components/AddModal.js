@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './addModal.css';
+import './AddModal.css';
 import axios from 'axios';
 
 class AddModal extends Component {

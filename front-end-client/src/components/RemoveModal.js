@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import './removeModal.css';
+import './RemoveModal.css';
 import axios from 'axios';
 
 class RemoveModal extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      response: []
-    }
-  }
+  //constructor(props) {
+  //  super(props)
+  //  this.state = {
+  //    response: []
+  //  }
+  //}
 
   handleRemove() {
     axios.delete(`http://localhost:3000/tools/${this.props.id}`)

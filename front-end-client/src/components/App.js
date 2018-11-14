@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import './App.css';
 import axios from 'axios';
-import AddModal from './addModal.js';
-import RemoveModal from './removeModal.js';
+import AddModal from './AddModal.js';
+import RemoveModal from './RemoveModal.js';
 
 class App extends Component {
 
